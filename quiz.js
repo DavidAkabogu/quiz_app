@@ -1,10 +1,9 @@
-// quiz.js
-
 class Quiz {
     constructor(questions) {
       this.questions = questions;
       this.currentQuestionIndex = 0;
       this.score = 0;
+
       this.timerInterval = null;
       this.timerElement = document.getElementById("timer")
       this.scoreElement = document.getElementById("score")
@@ -34,8 +33,6 @@ class Quiz {
       optionsElement.innerHTML = "";
       feedbackElement.textContent = "";
 
-      this.nextButton.style.display = "none";
-
       this.questionAnswered = false;
       
       currentQuestion.options.forEach((option, index) => {
@@ -43,9 +40,12 @@ class Quiz {
         optionButton.textContent = option;
         optionButton.addEventListener("click", () => this.checkAnswer(index));
         optionsElement.appendChild(optionButton);
+
+        this.nextButton.style.display = "none";
       });
 
-      this.startTimer(); // Start the timer for each question 
+      this.startTimer(); // Start the timer for each question
+      this.nextButton.style.display = "block";
     }
   
     checkAnswer(selectedOption) {
@@ -68,13 +68,13 @@ class Quiz {
 
       this.scoreElement.textContent = `Score: ${this.score}`;
 
-      this.nextButton.style.display = "block";
-
       if (this.currentQuestionIndex === this.questions.length - 1) {
         this.showEndOfQuiz();
       }
 
       this.questionAnswered = true;
+
+      this.moveToNextQuestion();
     }
 
     moveToNextQuestion() {
