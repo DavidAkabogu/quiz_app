@@ -10,6 +10,9 @@ class Quiz {
     this.nextButton = document.getElementById("next-btn");
     this.feedbackElement = document.getElementById("feedback");
     this.optionsElement = document.getElementById("options");
+    this.restartButton = document.getElementById("restart-btn");
+
+    this.restartButton.addEventListener("click", () => this.restartQuiz());
 
     this.nextButton.addEventListener("click", () => this.moveToNextQuestion());
 
@@ -23,6 +26,10 @@ class Quiz {
     this.nextButton.style.display = "none";
     this.scoreElement.textContent = "Score: 0";
     this.displayCurrentQuestion();
+
+    // Hide the restart button at the beginning
+    this.restartButton = document.getElementById("restart-btn");
+    this.restartButton.style.display = "none";
   }
 
   clearElement(element) {
@@ -132,6 +139,16 @@ class Quiz {
     this.timerElement.textContent = "";
     this.nextButton.style.display = "none";
     this.scoreElement.textContent = `Final Score: ${this.score} out of ${this.questions.length}`;
+
+    // Display the restart button
+    const restartButton = document.getElementById("restart-btn");
+    restartButton.style.display = "block";
+  }
+
+  restartQuiz() {
+    this.currentQuestionIndex = 0;
+    this.score = 0;
+    this.initializeQuiz();
   }
 }
 
