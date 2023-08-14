@@ -11,11 +11,7 @@ class Quiz {
     this.feedbackElement = document.getElementById("feedback");
     this.optionsElement = document.getElementById("options");
 
-    // this.questionAnswered = false
-
     this.nextButton.addEventListener("click", () => this.moveToNextQuestion());
-
-    // this.displayCurrentQuestion();
 
     this.initializeQuiz();
   }
@@ -45,7 +41,9 @@ class Quiz {
     const optionsElement = document.getElementById("options");
     const feedbackElement = document.getElementById("feedback");
 
-    questionNumberElement.textContent = `Question ${this.currentQuestionIndex + 1}`; // Update question number
+    questionNumberElement.textContent = `Question ${
+      this.currentQuestionIndex + 1
+    }`; // Update question number
     questionElement.textContent = currentQuestion.question;
     optionsElement.innerHTML = "";
 
@@ -84,6 +82,12 @@ class Quiz {
 
     this.scoreElement.textContent = `Score: ${this.score}`;
 
+    // Display the feedback for a few seconds (e.g., 3 seconds)
+    feedbackElement.style.display = "block";
+    setTimeout(() => {
+      feedbackElement.style.display = "none";
+    }, 1000);
+
     if (this.currentQuestionIndex === this.questions.length - 1) {
       this.showEndOfQuiz();
     }
@@ -121,7 +125,8 @@ class Quiz {
   showEndOfQuiz() {
     clearInterval(this.timerInterval);
     document.getElementById("question-number").textContent = "End of Quiz";
-    document.getElementById("question").textContent = "Thank you for completing the quiz!";
+    document.getElementById("question").textContent =
+      "Thank you for completing the quiz!";
     document.getElementById("options").innerHTML = "";
     document.getElementById("feedback").textContent = "";
     this.timerElement.textContent = "";
