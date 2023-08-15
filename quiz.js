@@ -115,7 +115,7 @@ class Quiz {
   }
 
   startTimer() {
-    let timeLeft = 29;
+    let timeLeft = 14;
 
     this.timerInterval = setInterval(() => {
       if (timeLeft > 0) {
